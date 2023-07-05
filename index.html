@@ -18,13 +18,27 @@
                     center: true
                 },
                 extend: {
+                    animation: {
+                        'updown': 'moveUpDown 4s infinite ease-in-out',
+                    },
                     colors: {
                         clifford: '#da373d',
                         primary: 'rgb(30 41 59)',
+                    },
+                    keyframes: {
+                        moveUpDown: {
+                            '0%, 100%': {
+                                transform: 'translateY(0)'
+                            },
+                            '50%': {
+                                transform: 'translateY(-20px)'
+                            },
+                        }
                     }
                 }
             }
         }
+
         // On page load or when changing themes, best to add inline in `head` to avoid FOUC
         if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window
                 .matchMedia('(prefers-color-scheme: dark)').matches)) {
@@ -36,8 +50,8 @@
 </head>
 
 <body>
-    <div
-        class="w-full h-full bg-cover bg-no-repeat bg-[url('assets/img/bg-hero.svg')] dark:bg-[url('assets/img/bg-hero-dark.svg')] dark:bg-gray-900">
+    <div class="w-full h-full bg-cover bg-no-repeat dark:bg-[url('assets/img/bg-hero-mobile-dark.svg')] bg-[url('assets/img/bg-hero-mobile.svg')]
+        md:bg-[url('assets/img/bg-hero.svg')] md:dark:bg-[url('assets/img/bg-hero-dark.svg')] dark:bg-gray-900">
         <div class="container">
 
             <!-- Start navbar -->
@@ -196,7 +210,7 @@
                                 class="text-slate-800 hover:text-white transition-all ease-in-out duration-300 bg-yellow-500 hover:bg-yellow-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm md:text-base px-6 py-2 md:px-10 md:py-3 text-center mr-3 md:mr-0 dark:bg-yellow-400 dark:hover:bg-yellow-600 dark:focus:ring-blue-600 ">Get
                                 Started</button>
                         </div>
-                        <div class="">
+                        <div class="animate-updown">
                             <img src="assets/img/image-1.svg" alt="" class="w-full">
                         </div>
                     </div>
@@ -208,7 +222,7 @@
     </div>
 
     <!-- Start Client Section -->
-    <section id="client" class="pt-32 pb-16 md:px-20 dark:bg-gray-900">
+    <section id="client" class="pt-24 md:pt-32 pb-16 md:px-20 dark:bg-gray-900">
         <div class="container">
             <div class="grid md:grid-cols-2">
                 <div class="md:mb-0 mb-10">
@@ -356,7 +370,7 @@
             </h1>
             <div class="grid md:grid-cols-2 mt-20 md:mt-24 items-center gap-1">
                 <div class="w-full mb-10 md:mb-0">
-                    <div class="h-5/6 w-11/12 mx-auto md:mx-0">
+                    <div class="h-5/6 w-11/12 mx-auto md:mx-0 animate-updown">
                         <img src="assets/img/features-img.svg" alt="" class="w-full h-full">
                     </div>
                 </div>
@@ -386,7 +400,7 @@
                         more time actually doing it.</p>
                 </div>
                 <div class="w-full ">
-                    <div class="h-5/6 w-11/12 mx-auto">
+                    <div class="h-5/6 w-11/12 mx-auto animate-updown">
                         <img src="assets/img/setup-img.svg" alt="" class="w-full h-full">
                     </div>
                 </div>
@@ -433,7 +447,7 @@
         <div class="container">
             <div class="grid md:grid-cols-2 place-items-center">
                 <div class="w-full mb-10 md:mb-0">
-                    <div class="w-10/12 h-5/6 mx-auto md:mx-0">
+                    <div class="w-10/12 h-5/6 mx-auto md:mx-0 animate-updown">
                         <img src="assets/img/savetime-img.svg" alt="" class="w-full h-full">
                     </div>
                 </div>
@@ -469,7 +483,7 @@
                         required.</p>
                 </div>
                 <div class="w-full">
-                    <div class="w-10/12 h-5/6 mx-auto md:mx-0">
+                    <div class="w-10/12 h-5/6 mx-auto md:mx-0 animate-updown">
                         <img src="assets/img/visualize-img.svg" alt="" class="w-full h-full">
                     </div>
                 </div>
@@ -483,7 +497,7 @@
         <div class="container">
             <div class="grid md:grid-cols-2 items-center">
                 <div class="w-full order-2 md:order-1">
-                    <div class="w-10/12 h-5/6 mx-auto">
+                    <div class="w-10/12 h-5/6 mx-auto animate-updown">
                         <img src="assets/img/customer-img.svg" alt="" class="w-full h-full">
                     </div>
                 </div>
