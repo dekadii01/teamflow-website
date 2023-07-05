@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TeamFlow</title>
+    <link rel="shortcut icon" href="assets/img/favicon.svg" type="image/x-icon">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.6/flowbite.min.css" rel="stylesheet" />
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                container: {
+                    padding: '16px',
+                    center: true
+                },
+                extend: {
+                    colors: {
+                        clifford: '#da373d',
+                        primary: 'rgb(30 41 59)',
+                    }
+                }
+            }
+        }
+        // On page load or when changing themes, best to add inline in `head` to avoid FOUC
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window
+                .matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark')
+        }
+    </script>
+</head>
+
+<body>
+    <div
+        class="w-full h-full bg-cover bg-no-repeat bg-[url('assets/img/bg-hero.svg')] dark:bg-[url('assets/img/bg-hero-dark.svg')] dark:bg-gray-900">
+        <div class="container">
+
+            <!-- Start navbar -->
+            <div class="container">
+                <nav class=" border-gray-200 bg-transparent pt-10">
+                    <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+                        <a href="https://flowbite.com/" class="flex items-center">
+                            <img src="assets/img/logo.svg" class="h-8 mr-3" alt="Flowbite Logo" />
+                        </a>
+                        <button data-collapse-toggle="navbar-cta" type="button"
+                            class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                            aria-controls="navbar-cta" aria-expanded="false">
+                            <span class="sr-only">Open main menu</span>
+                            <svg class="w-6 h-6 " aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                    d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                                    clip-rule="evenodd"></path>
+                            </svg>
+                        </button>
+                        <div class="items-center justify-between hidden w-full md:flex md:w-auto " id="navbar-cta">
+                            <ul class="flex flex-col font-medium px-4 md:p-0 mt-4  md:flex-row md:space-x-8 md:mt-0">
+                                <li>
+                                    <button id="dropdownNavbarLink" data-dropdown-toggle="dropdownNavbar"
+                                        class="flex items-center justify-between w-full py-2 pl-3 pr-4 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-gray-700 md:p-0 md:w-auto dark:text-white md:dark:hover:text-gray-300 dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent">Product
+                                        <svg class="w-5 h-5 ml-1" aria-hidden="true" fill="currentColor"
+                                            viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd"
+                                                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                                clip-rule="evenodd"></path>
+                                        </svg></button>
+                                    <!-- Dropdown menu -->
+                                    <div id="dropdownNavbar"
+                                        class="z-10 hidden font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
+                                        <ul class="py-2 text-sm text-gray-700 dark:text-gray-400"
+                                            aria-labelledby="dropdownLargeButton">
+                                            <li>
+                                                <a href="#"
+                                                    class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Menu
+                                                    1</a>
+                                            </li>
+                                            <li>
+                                                <a href="#"
+                                                    class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Menu
+                                                    2</a>
+                                            </li>
+                                            <li>
+                                                <a href="#"
+                                                    class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Menu
+                                                    3</a>
+                                            </li>
+                                        </ul>
+                                        <div class="py-1">
+                                            <a href="#"
+                                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-400 dark:hover:text-white">Download</a>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <button id="dropdownNavbarLink" data-dropdown-toggle="dropdownNavbar"
+                                        class="flex items-center justify-between w-full py-2 pl-3 pr-4 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-gray-700 md:p-0 md:w-auto dark:text-white md:dark:hover:text-gray-300 dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent">Solution
+                                        <svg class="w-5 h-5 ml-1" aria-hidden="true" fill="currentColor"
+                                            viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd"
+                                                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                                clip-rule="evenodd"></path>
+                                        </svg></button>
+                                    <!-- Dropdown menu -->
+                                    <div id="dropdownNavbar"
+                                        class="z-10 hidden font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
+                                        <ul class="py-2 text-sm text-gray-700 dark:text-gray-400"
+                                            aria-labelledby="dropdownLargeButton">
+                                            <li>
+                                                <a href="#"
+                                                    class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Menu
+                                                    1</a>
+                                            </li>
+                                            <li>
+                                                <a href="#"
+                                                    class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Menu
+                                                    2</a>
+                                            </li>
+                                            <li>
+                                                <a href="#"
+                                                    class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Menu
+                                                    3</a>
+                                            </li>
+                                        </ul>
+                                        <div class="py-1">
+                                            <a href="#"
+                                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-400 dark:hover:text-white">Download</a>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="#" class="block py-2 pl-3 pr-4 text-white rounded hover:bg-gray-100
+                                        md:hover:bg-transparent md:hover:text-blue-700 md:p-0
+                                        md:dark:hover:text-gray-300 dark:text-white dark:hover:bg-gray-700
+                                        dark:hover:text-white md:dark:hover:bg-transparent
+                                        dark:border-gray-700">Enterprise</a>
+                                </li>
+                                <li>
+                                    <a href="#" class="block py-2 pl-3 pr-4 text-white rounded hover:bg-gray-100
+                                        md:hover:bg-transparent md:hover:text-blue-700 md:p-0
+                                        md:dark:hover:text-gray-300 dark:text-white dark:hover:bg-gray-700
+                                        dark:hover:text-white md:dark:hover:bg-transparent
+                                        dark:border-gray-700">Pricing</a>
+                                </li>
+                            </ul>
+                            <div class="flex ml-7 md:ml-64 gap-5 md:gap-7 md:items-center flex-col md:flex-row">
+                                <a href="" class="order-2 text-gray-300 font-semibold md:order-1">Login</a>
+                                <button type="button" class="order-3 md:order-2 text-slate-800 hover:text-white transition-all ease-in-out duration-300
+                                    bg-yellow-500  hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300
+                                    font-medium rounded-lg text-base px-10 py-4 text-center mr-3 md:mr-0
+                                    dark:hover:bg-blue-600 dark:focus:ring-blue-600 ">Sign
+                                    Up</button>
+                                <button id="theme-toggle" type="button"
+                                    class="order-1 md:order-3 text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5">
+                                    <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5" fill="currentColor"
+                                        viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z">
+                                        </path>
+                                    </svg>
+                                    <svg id="theme-toggle-light-icon" class="hidden w-5 h-5" fill="currentColor"
+                                        viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"
+                                            fill-rule="evenodd" clip-rule="evenodd"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+            <!-- End Navbar -->
+
+            <!-- Start Hero Section -->
+            <section id="hero" class="mt-14 md:mt-20 mx-4">
+                <div class="container">
+                    <div class="grid md:grid-cols-2 justify-center">
+                        <div class="md:mb-0 mb-10">
+                            <div class="py-3 px-2 bg-white w-fit rounded">
+                                <h3 class="text-slate-800 text-base">👋 Welcome to TeamFlow</h3>
+                            </div>
+                            <h1 class="text-white text-3xl md:text-5xl font-bold md:w-9/12 mt-4 leading-none">
+                                Work the way that works for you
+                            </h1>
+                            <div class="h-1 w-20 rounded bg-[#3ADAD9] mt-7"></div>
+                            <p class="text-white my-5 text-base md:text-xl md:w-9/12">Create, Build, Collaborate and
+                                ship
+                                products very
+                                faster
+                            </p>
+                            <button type="button"
+                                class="text-slate-800 hover:text-white transition-all ease-in-out duration-300 bg-yellow-500 hover:bg-yellow-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm md:text-base px-6 py-2 md:px-10 md:py-3 text-center mr-3 md:mr-0 dark:bg-yellow-400 dark:hover:bg-yellow-600 dark:focus:ring-blue-600 ">Get
+                                Started</button>
+                        </div>
+                        <div class="">
+                            <img src="assets/img/image-1.svg" alt="" class="w-full">
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- End Hero Section-->
+        </div>
+
+    </div>
+
+    <!-- Start Client Section -->
+    <section id="client" class="pt-32 pb-16 md:px-20 dark:bg-gray-900">
+        <div class="container">
+            <div class="grid md:grid-cols-2">
+                <div class="md:mb-0 mb-10">
+                    <div class="w-10 h-1 bg-[#FFCA1D] rounded"></div>
+                    <h1 class="font-bold text-2xl text-primary mt-5 md:w-9/12 dark:text-white">See why over 100,000
+                        teams
+                        choose
+                        TeamFlow.com
+                    </h1>
+                </div>
+                <div class="hidden md:flex items-center justify-between">
+                    <div class="h-2/3 w-9/12">
+                        <img src="assets/img/client/client-1.svg" alt="" class="h-full w-full">
+                    </div>
+                    <div class="h-2/3 w-9/12">
+                        <img src="assets/img/client/client-2.svg" alt="" class="h-full w-full">
+                    </div>
+                    <div class="h-2/3 w-9/12">
+                        <img src="assets/img/client/client-3.svg" alt="" class="h-full w-full">
+                    </div>
+                    <div class="h-2/3 w-9/12">
+                        <img src="assets/img/client/client-4.svg" alt="" class="h-full w-full">
+                    </div>
+                </div>
+                <div class="flex md:hidden items-center justify-between">
+                    <div id="default-carousel" class="relative w-full" data-carousel="slide">
+                        <!-- Carousel wrapper -->
+                        <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
+                            <!-- Item 1 -->
+                            <div class="hidden duration-700 ease-in-out " data-carousel-item>
+                                <img src="assets/img/client/client-1.svg" class="absolute block w-1/2 h-1/2 -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2
+                                    " alt="...">
+                            </div>
+                            <!-- Item 2 -->
+                            <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                                <img src="assets/img/client/client-2.svg" class="absolute block w-1/2 h-1/2 -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2
+                                    " alt="...">
+                            </div>
+                            <!-- Item 3 -->
+                            <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                                <img src="assets/img/client/client-3.svg" class="absolute block w-1/2 h-1/2 -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2
+                                    " alt="...">
+                            </div>
+                            <!-- Item 4 -->
+                            <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                                <img src="assets/img/client/client-4.svg" class="absolute block w-1/2 h-1/2 -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2
+                                    " alt="...">
+                            </div>
+                        </div>
+                        <!-- Slider indicators -->
+                        <div class="absolute z-30 flex space-x-3 -translate-x-1/2 bottom-5 left-1/2">
+                            <button type="button" class="w-3 h-3 rounded-full bg-yellow-500 dark:bg-yellow-500"
+                                aria-current="true" aria-label="Slide 1" data-carousel-slide-to="0"></button>
+                            <button type="button" class="w-3 h-3 rounded-full bg-yellow-500 dark:bg-yellow-500"
+                                aria-current="false" aria-label="Slide 2" data-carousel-slide-to="1"></button>
+                            <button type="button" class="w-3 h-3 rounded-full bg-yellow-500 dark:bg-yellow-500"
+                                aria-current="false" aria-label="Slide 3" data-carousel-slide-to="2"></button>
+                            <button type="button" class="w-3 h-3 rounded-full bg-yellow-500 dark:bg-yellow-500"
+                                aria-current="false" aria-label="Slide 4" data-carousel-slide-to="3"></button>
+                            <button type="button" class="w-3 h-3 rounded-full bg-yellow-500 dark:bg-yellow-500"
+                                aria-current="false" aria-label="Slide 5" data-carousel-slide-to="4"></button>
+                        </div>
+                        <!-- Slider controls -->
+                        <button type="button"
+                            class="absolute top-0 left-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
+                            data-carousel-prev>
+                            <span
+                                class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-yellow-500/30 group-hover:bg-white/50 dark:group-hover:bg-yellow-500/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-yellow-500/70 group-focus:outline-none">
+                                <svg class="w-4 h-4 text-white dark:text-yellow-500" aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="M5 1 1 5l4 4" />
+                                </svg>
+                                <span class="sr-only">Previous</span>
+                            </span>
+                        </button>
+                        <button type="button"
+                            class="absolute top-0 right-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
+                            data-carousel-next>
+                            <span
+                                class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-yellow-500/30 group-hover:bg-white/50 dark:group-hover:bg-yellow-500/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-yellow-500/70 group-focus:outline-none">
+                                <svg class="w-4 h-4 text-white dark:text-yellow-500" aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="m1 9 4-4-4-4" />
+                                </svg>
+                                <span class="sr-only">Next</span>
+                            </span>
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End Client Section -->
+
+    <!-- Start service Section -->
+    <section id="service" class="py-28 md:px-20 dark:bg-gray-900">
+        <div class="container">
+            <h1 class="text-center font-semibold text-3xl dark:text-white">What you <span
+                    class="text-yellow-500 font-bold">can
+                    do?</span></h1>
+            <div class="grid md:grid-cols-3 mt-20">
+                <div class="w-full h-fit mb-5 md:mb-0">
+                    <div class="w-20 h-3/4 mx-auto">
+                        <img src="assets/img/service/graph_icon.svg" alt="" class="w-full h-full">
+                    </div>
+                    <h1 class="font-bold text-xl text-[#2B3377] text-center mt-5 dark:text-white">Business Planning</h1>
+                    <p class="mt-3 text-center text-slate-800 text-lg md:w-9/12 mx-auto dark:text-slate-600">
+                        Our Business Plan is a written document describing a company’s core business activities.
+                    </p>
+                </div>
+                <div class="w-full h-fit mb-5 md:mb-0">
+                    <div class="w-20 h-3/4 mx-auto">
+                        <img src="assets/img/service/financial_icon.svg" alt="" class="w-full h-full">
+                    </div>
+                    <h1 class="font-bold text-xl text-[#2B3377] text-center mt-5 dark:text-white">Financial Planning
+                    </h1>
+                    <p class="mt-3 text-center text-slate-800 text-lg md:w-9/12 mx-auto dark:text-slate-500">
+                        Our expert team sensible decision about their money, to ensure they achieve the life goals. A
+                        financial plan.
+                    </p>
+                </div>
+                <div class="w-full h-fit mb-5 md:mb-0">
+                    <div class="w-20 h-3/4 mx-auto">
+                        <img src="assets/img/service/market_icon.svg" alt="" class="w-full h-full">
+                    </div>
+                    <h1 class="font-bold text-xl text-[#2B3377] text-center mt-5 dark:text-white">Market Analysis</h1>
+                    <p class="mt-3 text-center text-slate-800 dark:text-slate-500 text-lg md:w-9/12 mx-auto">
+                        A market analysis is a quantitative and qualitative assessment of a market. It looks into the
+                        size of the market.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End service Section -->
+
+    <!-- Start features section -->
+    <section id="features" class="md:py-28 py-16 md:px-20 dark:bg-gray-900">
+        <div class="container">
+            <h1 class="text-center font-semibold text-3xl dark:text-white">Our <span
+                    class="text-yellow-500 font-bold">Features</span>
+            </h1>
+            <div class="grid md:grid-cols-2 mt-20 md:mt-24 items-center gap-1">
+                <div class="w-full mb-10 md:mb-0">
+                    <div class="h-5/6 w-11/12 mx-auto md:mx-0">
+                        <img src="assets/img/features-img.svg" alt="" class="w-full h-full">
+                    </div>
+                </div>
+                <div class="w-full">
+                    <h1 class="font-bold text-3xl text-slate-800 md:w-10/12 dark:text-white">Manage everything
+                        in one workspace</h1>
+                    <div class="w-12 h-1 bg-[#FFCA1D] rounded my-5"></div>
+                    <p class="text-base text-slate-600 md:w-10/12 dark:text-gray-500">Planning, tracking and delivering
+                        your team’s best
+                        work
+                        has
+                        never been easier. An integrated
+                        workspace that’s simple to use, TeamFlow lets you spend less time managing your work and
+                        more time actually doing it.</p>
+                </div>
+            </div>
+            <div class="grid md:grid-cols-2 mt-16 md:mt-24 items-center gap-1">
+                <div class="w-full mb-10 md:mb-0">
+                    <h1 class="font-bold text-3xl text-slate-800 md:w-10/12 dark:text-white">Set up in minutes</h1>
+                    <div class="w-12 h-1 bg-[#FFCA1D] rounded my-5"></div>
+                    <p class="text-base text-slate-600 md:w-10/12 dark:text-gray-500">Planning, tracking and delivering
+                        your team’s best
+                        work
+                        has
+                        never been easier. An integrated
+                        workspace that’s simple to use, TeamFlow lets you spend less time managing your work and
+                        more time actually doing it.</p>
+                </div>
+                <div class="w-full ">
+                    <div class="h-5/6 w-11/12 mx-auto">
+                        <img src="assets/img/setup-img.svg" alt="" class="w-full h-full">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End features section -->
+
+    <!-- Start integrate section -->
+    <section id="integrate" class="py-28 md:px-20 dark:bg-gray-900">
+        <div class="container">
+            <h1 class="text-center font-bold text-2xl text-slate-800 dark:text-white"><span
+                    class="text-[#FFCA1D] ">Integrate</span>
+                with
+                your existing tools <br> in a few clicks</h1>
+            <div class="grid md:grid-cols-5 place-items-center mt-16">
+                <div class="w-10/12 h-5/6">
+                    <img src="assets/img/integrate/integrate-1.svg" alt="" class="w-full h-full">
+                </div>
+                <div class="w-10/12 h-5/6">
+                    <img src="assets/img/integrate/integrate-2.svg" alt="" class="w-full h-full">
+                </div>
+                <div class="w-10/12 h-5/6">
+                    <img src="assets/img/integrate/integrate-3.svg" alt="" class="w-full h-full">
+                </div>
+                <div class="w-10/12 h-5/6">
+                    <img src="assets/img/integrate/integrate-4.svg" alt="" class="w-full h-full drop-shadow-xl">
+                </div>
+                <div class="w-10/12 h-5/6">
+                    <img src="assets/img/integrate/integrate-5.svg" alt="" class="w-full h-full">
+                </div>
+            </div>
+            <div class="flex items-center justify-center mt-5">
+                <button type="button"
+                    class="text-slate-800 hover:text-white transition-all  ease-in-out duration-300 bg-yellow-500 hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-base px-12 py-3 text-center mr-3 md:mr-0 dark:bg-yellow-400 dark:hover:bg-blue-600 dark:focus:ring-blue-600 ">View
+                    All</button>
+            </div>
+        </div>
+    </section>
+    <!-- End integrate section -->
+
+    <!-- Start savetime section -->
+    <section id="savetime" class="pt-20 md:px-20 dark:bg-gray-900">
+        <div class="container">
+            <div class="grid md:grid-cols-2 place-items-center">
+                <div class="w-full mb-10 md:mb-0">
+                    <div class="w-10/12 h-5/6 mx-auto md:mx-0">
+                        <img src="assets/img/savetime-img.svg" alt="" class="w-full h-full">
+                    </div>
+                </div>
+                <div class="w-full">
+                    <h1 class="font-bold text-3xl text-slate-800 md:w-10/12 dark:text-white">Save time with Automations
+                    </h1>
+                    <div class="w-12 h-1 bg-[#FFCA1D] rounded my-5"></div>
+                    <p class="text-base text-slate-600 md:w-10/12 dark:text-gray-500">Automate the repetitive work in
+                        seconds so you can
+                        avoid
+                        human error and focus on what matters. It gives the impression of software that its highly
+                        automated which implies that it is good for client for who want to save time and manage team
+                        members easily.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End savetime section -->
+
+    <!-- Start visualize section -->
+    <section id="visualize" class="pt-20 md:px-20 dark:bg-gray-900">
+        <div class="container">
+            <div class="grid md:grid-cols-2 place-items-center">
+                <div class="w-full mb-10 md:mb-0">
+                    <h1 class="font-bold text-3xl text-slate-800 dark:text-white md:w-10/12">Visualize work with Views
+                    </h1>
+                    <div class="w-12 h-1 bg-[#686DF1] rounded my-5"></div>
+                    <p class="text-base text-slate-600 md:w-10/12 text-justify dark:text-gray-500">View data as a map,
+                        calendar, timeline,
+                        kanban, and
+                        more
+                        The easy-to-use, visual interface lets any team member jump in and get started, no training
+                        required.</p>
+                </div>
+                <div class="w-full">
+                    <div class="w-10/12 h-5/6 mx-auto md:mx-0">
+                        <img src="assets/img/visualize-img.svg" alt="" class="w-full h-full">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End visualize section -->
+
+    <!-- Start customer support section -->
+    <section id="customer-support" class="py-20 md:px-20 dark:bg-gray-900">
+        <div class="container">
+            <div class="grid md:grid-cols-2 items-center">
+                <div class="w-full order-2 md:order-1">
+                    <div class="w-10/12 h-5/6 mx-auto">
+                        <img src="assets/img/customer-img.svg" alt="" class="w-full h-full">
+                    </div>
+                </div>
+                <div class="w-full order-1 md:order-2 mb-10 md:mb-0">
+                    <h1 class="font-bold text-3xl text-slate-800 dark:text-white md:w-10/12">24/7 Customer Support</h1>
+                    <div class="w-12 h-1 bg-[#FFCA1D] rounded my-5"></div>
+                    <p class="text-base text-slate-600 md:w-10/12 dark:text-gray-500">Our team is here to give you
+                        personalized support
+                        within
+                        the hour available 24/7. In accordance with our commitment to providing superior and
+                        professional service. Join daily live webinars, watch our tutorials, or browse through our
+                        knowledge
+                        base</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End customer support section -->
+
+    <!-- Start testimonials -->
+    <div class="dark:bg-gray-900 pb-10">
+        <h1 class="font-bold text-3xl text-slate-800 text-center dark:text-white">Client</h1>
+        <h1 class="font-bold text-3xl text-[#FFCA1D] text-center mt-1">Testimonials</h1>
+    </div>
+    <section id="testimonials"
+        class="pb-10 md:px-20 bg-no-repeat bg-[url('assets/img/world-bg.svg')] bg-cover dark:bg-gray-900">
+        <div class="container">
+            <div id="indicators-carousel" class="relative w-full" data-carousel="static">
+                <!-- Carousel wrapper -->
+                <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
+                    <!-- Item 1 -->
+                    <div class="hidden duration-700 ease-in-out" data-carousel-item="active">
+                        <a href="#" class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100
+                        dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 absolute block w-full
+                        -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
+                            <blockquote class="text-xl italic font-semibold text-gray-900 dark:text-white">
+                                <svg aria-hidden="true" class="w-10 h-10 text-gray-400 dark:text-gray-600"
+                                    viewBox="0 0 24 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M14.017 18L14.017 10.609C14.017 4.905 17.748 1.039 23 0L23.995 2.151C21.563 3.068 20 5.789 20 8H24V18H14.017ZM0 18V10.609C0 4.905 3.748 1.038 9 0L9.996 2.151C7.563 3.068 6 5.789 6 8H9.983L9.983 18L0 18Z"
+                                        fill="currentColor" /></svg>
+                                <p>"The features on monday.com make our team work faster and easier to organize."
+                                </p>
+                            </blockquote>
+
+                        </a>
+                    </div>
+                    <!-- Item 2 -->
+                    <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                        <a href="#" class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100
+                        dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 absolute block w-full
+                        -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
+                            <blockquote class="text-xl italic font-semibold text-gray-900 dark:text-white">
+                                <svg aria-hidden="true" class="w-10 h-10 text-gray-400 dark:text-gray-600"
+                                    viewBox="0 0 24 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M14.017 18L14.017 10.609C14.017 4.905 17.748 1.039 23 0L23.995 2.151C21.563 3.068 20 5.789 20 8H24V18H14.017ZM0 18V10.609C0 4.905 3.748 1.038 9 0L9.996 2.151C7.563 3.068 6 5.789 6 8H9.983L9.983 18L0 18Z"
+                                        fill="currentColor" /></svg>
+                                <p>"The features on monday.com make our team work faster and easier to organize."
+                                </p>
+                            </blockquote>
+
+                        </a>
+                    </div>
+                    <!-- Item 3 -->
+                    <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                        <a href="#" class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100
+                        dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 absolute block w-full
+                        -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
+                            <blockquote class="text-xl italic font-semibold text-gray-900 dark:text-white">
+                                <svg aria-hidden="true" class="w-10 h-10 text-gray-400 dark:text-gray-600"
+                                    viewBox="0 0 24 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M14.017 18L14.017 10.609C14.017 4.905 17.748 1.039 23 0L23.995 2.151C21.563 3.068 20 5.789 20 8H24V18H14.017ZM0 18V10.609C0 4.905 3.748 1.038 9 0L9.996 2.151C7.563 3.068 6 5.789 6 8H9.983L9.983 18L0 18Z"
+                                        fill="currentColor" /></svg>
+                                <p>"The features on monday.com make our team work faster and easier to organize."
+                                </p>
+                            </blockquote>
+
+                        </a>
+                    </div>
+                    <!-- Item 4 -->
+                    <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                        <a href="#" class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100
+                        dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 absolute block w-full
+                        -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
+                            <blockquote class="text-xl italic font-semibold text-gray-900 dark:text-white">
+                                <svg aria-hidden="true" class="w-10 h-10 text-gray-400 dark:text-gray-600"
+                                    viewBox="0 0 24 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M14.017 18L14.017 10.609C14.017 4.905 17.748 1.039 23 0L23.995 2.151C21.563 3.068 20 5.789 20 8H24V18H14.017ZM0 18V10.609C0 4.905 3.748 1.038 9 0L9.996 2.151C7.563 3.068 6 5.789 6 8H9.983L9.983 18L0 18Z"
+                                        fill="currentColor" /></svg>
+                                <p>"The features on monday.com make our team work faster and easier to organize."
+                                </p>
+                            </blockquote>
+
+                        </a>
+                    </div>
+                    <!-- Item 5 -->
+                    <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                        <a href="#" class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100
+                        dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 absolute block w-full
+                        -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
+                            <blockquote class="text-xl italic font-semibold text-gray-900 dark:text-white">
+                                <svg aria-hidden="true" class="w-10 h-10 text-gray-400 dark:text-gray-600"
+                                    viewBox="0 0 24 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M14.017 18L14.017 10.609C14.017 4.905 17.748 1.039 23 0L23.995 2.151C21.563 3.068 20 5.789 20 8H24V18H14.017ZM0 18V10.609C0 4.905 3.748 1.038 9 0L9.996 2.151C7.563 3.068 6 5.789 6 8H9.983L9.983 18L0 18Z"
+                                        fill="currentColor" /></svg>
+                                <p>"The features on monday.com make our team work faster and easier to organize."
+                                </p>
+                            </blockquote>
+
+                        </a>
+                    </div>
+                </div>
+                <!-- Slider indicators -->
+                <div class="absolute z-30 flex space-x-3 -translate-x-1/2 bottom-0 md:bottom-5 left-1/2">
+                    <button type="button" class="w-3 h-3 rounded-full bg-yellow-500 dark:bg-yellow-500"
+                        aria-current="true" aria-label="Slide 1" data-carousel-slide-to="0"></button>
+                    <button type="button" class="w-3 h-3 rounded-full bg-yellow-500 dark:bg-yellow-500"
+                        aria-current="false" aria-label="Slide 2" data-carousel-slide-to="1"></button>
+                    <button type="button" class="w-3 h-3 rounded-full bg-yellow-500 dark:bg-yellow-500"
+                        aria-current="false" aria-label="Slide 3" data-carousel-slide-to="2"></button>
+                    <button type="button" class="w-3 h-3 rounded-full bg-yellow-500 dark:bg-yellow-500"
+                        aria-current="false" aria-label="Slide 4" data-carousel-slide-to="3"></button>
+                    <button type="button" class="w-3 h-3 rounded-full bg-yellow-500 dark:bg-yellow-500"
+                        aria-current="false" aria-label="Slide 5" data-carousel-slide-to="4"></button>
+                </div>
+                <!-- Slider controls -->
+                <button type="button"
+                    class="absolute top-0 left-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
+                    data-carousel-prev>
+                    <span class="inline-flex items-center justify-center w-8 h-8 rounded-full sm:w-10 sm:h-10
+                        bg-[#FFCA1D]/30 dark:bg-[#FFCA1D]/30 group-hover:bg-[#FFCA1D]/60
+                        dark:group-hover:bg-[#FFCA1D]/60
+                        group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-[#FFCA1D]/70
+                        group-focus:outline-none">
+                        <svg aria-hidden="true" class="w-5 h-5 text-white sm:w-6 sm:h-6 dark:text-[#FFCA1D]" fill="none"
+                            stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7">
+                            </path>
+                        </svg>
+                        <span class="sr-only">Previous</span>
+                    </span>
+                </button>
+                <button type="button"
+                    class="absolute top-0 right-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
+                    data-carousel-next>
+                    <span class="inline-flex items-center justify-center w-8 h-8 rounded-full sm:w-10 sm:h-10
+                        bg-[#FFCA1D]/30 dark:bg-[#FFCA1D]/30 group-hover:bg-[#FFCA1D]/60
+                        dark:group-hover:bg-[#FFCA1D]/60
+                        group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-[#FFCA1D]/70
+                        group-focus:outline-none">
+                        <svg aria-hidden="true" class="w-5 h-5 text-white sm:w-6 sm:h-6 dark:text-[#FFCA1D]" fill="none"
+                            stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7">
+                            </path>
+                        </svg>
+                        <span class="sr-only">Next</span>
+                    </span>
+                </button>
+            </div>
+        </div>
+    </section>
+    <!-- End testimonials -->
+
+    <!-- Start support section -->
+    <section id="footer-support" class="bg-[#FAFAFF] py-32 md:px-20 dark:bg-gray-800">
+        <div class="container">
+            <h1 class="font-semibold text-xl text-[#EB801D] text-center">Support</h1>
+            <h1 class="font-bold text-3xl text-[#2D3150] text-center dark:text-white">Subscribe Newsletter & get</h1>
+            <h1 class="font-light text-2xl text-[#2D3150] text-center dark:text-white">Company News</h1>
+            <form class="w-full max-w-md mx-auto mt-10 shadow-md">
+                <label for="default-email" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Email
+                    sign-up</label>
+                <div class="relative">
+                    <div class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none">
+                        <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 16">
+                            <path
+                                d="m10.036 8.278 9.258-7.79A1.979 1.979 0 0 0 18 0H2A1.987 1.987 0 0 0 .641.541l9.395 7.737Z" />
+                            <path
+                                d="M11.241 9.817c-.36.275-.801.425-1.255.427-.428 0-.845-.138-1.187-.395L0 2.6V14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2.5l-8.759 7.317Z" />
+                        </svg>
+                    </div>
+                    <input type="email" id="default-email"
+                        class="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-white focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        placeholder="Enter your email here..." required>
+                    <button type="submit" class="text-white absolute right-2.5 bottom-2.5 bg-[#686DF1] hover:bg-[#686DF1]/60 focus:ring-4
+                        focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2
+                        dark:bg-[#686DF1]
+                        dark:hover:bg-[#686DF1]/60 dark:focus:ring-[#686DF1]"><svg xmlns="http://www.w3.org/2000/svg"
+                            fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                            class="w-4 h-4 inline-block mr-2">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" />
+                        </svg>
+                        Subscribe</button>
+                </div>
+            </form>
+        </div>
+    </section>
+    <!-- End support section -->
+
+    <!-- Start footer section -->
+    <footer class="bg-white dark:bg-gray-900">
+        <div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
+            <div class="md:flex md:justify-between">
+                <div class="mb-6 md:mb-0">
+                    <a href="#" class="flex items-center">
+                        <img src="assets/img/footer-logo.svg" class="h-8 mr-3" alt="FlowBite Logo" />
+
+                    </a>
+                </div>
+                <div class="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
+                    <div>
+                        <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Resources</h2>
+                        <ul class="text-gray-600 dark:text-gray-400 font-medium">
+                            <li class="mb-4">
+                                <a href="https://adipramana.vercel.app/" class="hover:underline">Adi Pramana</a>
+                            </li>
+                            <li>
+                                <a href="https://tailwindcss.com/" class="hover:underline">Tailwind CSS</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Follow me</h2>
+                        <ul class="text-gray-600 dark:text-gray-400 font-medium">
+                            <li class="mb-4">
+                                <a href="https://github.com/dekadii01" class="hover:underline ">Github</a>
+                            </li>
+                            <li>
+                                <a href="https://www.instagram.com/dekadii01/" class="hover:underline">Instagram</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Legal</h2>
+                        <ul class="text-gray-600 dark:text-gray-400 font-medium">
+                            <li class="mb-4">
+                                <a href="#" class="hover:underline">Privacy Policy</a>
+                            </li>
+                            <li>
+                                <a href="#" class="hover:underline">Terms &amp; Conditions</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
+            <div class="sm:flex sm:items-center sm:justify-between">
+                <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400"><span id="tahun"></span> <a
+                        href="#" class="hover:underline">TeamFlow™</a>. All Rights Reserved.
+                </span>
+                <div class="flex mt-4 space-x-6 sm:justify-center sm:mt-0">
+                    <a href="#" class="text-gray-500 hover:text-gray-900 dark:hover:text-white">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path fill-rule="evenodd"
+                                d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"
+                                clip-rule="evenodd" /></svg>
+                        <span class="sr-only">Facebook page</span>
+                    </a>
+                    <a href="#" class="text-gray-500 hover:text-gray-900 dark:hover:text-white">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path fill-rule="evenodd"
+                                d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z"
+                                clip-rule="evenodd" /></svg>
+                        <span class="sr-only">Instagram page</span>
+                    </a>
+                    <a href="#" class="text-gray-500 hover:text-gray-900 dark:hover:text-white">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path
+                                d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" />
+                        </svg>
+                        <span class="sr-only">Twitter page</span>
+                    </a>
+                    <a href="#" class="text-gray-500 hover:text-gray-900 dark:hover:text-white">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path fill-rule="evenodd"
+                                d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+                                clip-rule="evenodd" /></svg>
+                        <span class="sr-only">GitHub account</span>
+                    </a>
+                    <a href="#" class="text-gray-500 hover:text-gray-900 dark:hover:text-white">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path fill-rule="evenodd"
+                                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10c5.51 0 10-4.48 10-10S17.51 2 12 2zm6.605 4.61a8.502 8.502 0 011.93 5.314c-.281-.054-3.101-.629-5.943-.271-.065-.141-.12-.293-.184-.445a25.416 25.416 0 00-.564-1.236c3.145-1.28 4.577-3.124 4.761-3.362zM12 3.475c2.17 0 4.154.813 5.662 2.148-.152.216-1.443 1.941-4.48 3.08-1.399-2.57-2.95-4.675-3.189-5A8.687 8.687 0 0112 3.475zm-3.633.803a53.896 53.896 0 013.167 4.935c-3.992 1.063-7.517 1.04-7.896 1.04a8.581 8.581 0 014.729-5.975zM3.453 12.01v-.26c.37.01 4.512.065 8.775-1.215.25.477.477.965.694 1.453-.109.033-.228.065-.336.098-4.404 1.42-6.747 5.303-6.942 5.629a8.522 8.522 0 01-2.19-5.705zM12 20.547a8.482 8.482 0 01-5.239-1.8c.152-.315 1.888-3.656 6.703-5.337.022-.01.033-.01.054-.022a35.318 35.318 0 011.823 6.475 8.4 8.4 0 01-3.341.684zm4.761-1.465c-.086-.52-.542-3.015-1.659-6.084 2.679-.423 5.022.271 5.314.369a8.468 8.468 0 01-3.655 5.715z"
+                                clip-rule="evenodd" /></svg>
+                        <span class="sr-only">Dribbble account</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- End footer section -->
+
+
+    <script src="assets/js/app.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.6/flowbite.min.js"></script>
+</body>
+
+</html>
